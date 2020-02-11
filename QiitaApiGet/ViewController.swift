@@ -12,7 +12,7 @@ import Alamofire
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     //QiitaStructの構造体を定義
-    var qiitaStruct: QiitaStruct?
+    var qiitaStruct: [QiitaStruct]?
     
     //tableViewを定義
     var tableView: UITableView!
@@ -45,15 +45,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                     print("hirhiro4")
                 }
                 
-                guard let qiitaData = try? JSONDecoder().decode(QiitaStruct.self, from: data) else { return print("hirohiro5") }
+                guard let qiitaData = try? JSONDecoder().decode([QiitaStruct].self, from: data) else { return print("hirohiro5") }
                 
                 print(qiitaData)
+
+                self.qiitaStruct = qiitaData
                 self.tableView.reloadData()
-                
             case .failure(let error):
                 print("hirohiro3")
                 print(error)
             }
+            self.tableView.reloadData()
         }
     }
     
@@ -63,24 +65,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        
+        
+ 
+        return 10
         //通信が非同期のため、初回はnilを返すため。リロード時と処理を分岐
-        if let cnt = self.qiitaStruct?.title.count{
-            return cnt
-        }
-        return 0
+//        if let cnt = self.qiitaStruct?.count{
+//            print(qiitaStruct?.count)
+//            return cnt
+//        }
+//        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: "cell")
-//        
-//        //通信が非同期のため、初回はnilを返すため。リロード時と処理を分岐
-//        if let qiitaData = qiitaStruct?[indexPath.row]{
-//            
-//            cell.textLabel?.text = qiitaData[indexPath.row].tiltle
-//            cell.detailTextLabel?.text = qiitaStruct?[indexPath.row].user.name
-//        }
+        
+        //通信が非同期のため、初回はnilを返すため。リロード時と処理を分岐
+        if let qiitaData = qiitaStruct?[indexPath.row]{
+            
+            cell.textLabel?.text = qiitaData.title
+            cell.detailTextLabel?.text = qiitaData.user.name
+        }
         return cell
     }
-
+    
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct QiitaStruct: Codable {
+class QiitaStruct: Codable {
     var title: String
     var user: User
 }
