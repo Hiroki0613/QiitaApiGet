@@ -84,7 +84,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if let qiitaData = qiitaStruct?[indexPath.row]{
             
             cell.textLabel?.text = qiitaData.title
+            print("hirohiro6\(qiitaData.title)")
             cell.detailTextLabel?.text = qiitaData.user.name
+            print("hirohiro7\(qiitaData.user.name)")
         }
         return cell
     }
