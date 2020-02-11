@@ -30,6 +30,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         view.addSubview(tableView)
         
+        print("hirohiro")
         startAlamofire()
         tableView.reloadData()
     }
@@ -39,13 +40,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             switch response.result {
             case .success:
-                guard let data = response.data else { return }
-                guard let qiitaData = try? JSONDecoder().decode(QiitaStruct.self, from: data) else { return }
+                print("hirohiro2")
+                guard let data = response.data else { return
+                    print("hirhiro4")
+                }
+                
+                guard let qiitaData = try? JSONDecoder().decode(QiitaStruct.self, from: data) else { return print("hirohiro5") }
                 
                 print(qiitaData)
                 self.tableView.reloadData()
                 
             case .failure(let error):
+                print("hirohiro3")
                 print(error)
             }
         }
