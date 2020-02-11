@@ -12,7 +12,7 @@ import Alamofire
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     //QiitaStructの構造体を定義
-    var qiitaStruct: [QiitaStruct]?
+    var qiitaStruct : [QiitaStruct]?
     
     //tableViewを定義
     var tableView: UITableView!
@@ -64,17 +64,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        
- 
-        return 10
         //通信が非同期のため、初回はnilを返すため。リロード時と処理を分岐
-//        if let cnt = self.qiitaStruct?.count{
-//            print(qiitaStruct?.count)
-//            return cnt
-//        }
-//        return 0
+        if let cnt = self.qiitaStruct?.count {
+            return cnt
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
